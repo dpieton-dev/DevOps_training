@@ -1,0 +1,29 @@
+==================================================================================
+*                                    Retour TP1                                  *
+==================================================================================
+
+
+COMMANDE lscpu :
+- Architecture : X86_64
+- Modèle Processeurs : Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
+- NB Coeurs : 4
+- NB Threads : 2
+
+                        ---------------
+COMMANDE free -h :
+- Quantité RAM installé : 15Gi
+- Mémoire utilisé : 3.7Gi
+- Mémoire disponible : 11Gi
+
+                        ---------------
+COMMANDE lsblk :
+- Disque principal : sdb
+- Partitions : sda
+- Taille : sdb : 238.5G | sda2 : 933G et sda3 : 930G
+
+                        ---------------
+COMMANDE df -h :
+-   /dev/sda2          918G    678M  870G   1% /home/dominique/devlab
+    /dev/sda3          915G     48K  868G   1% /home/dominique/devopslab
+    /dev/sdb2          233G     25G  196G  12% /
+                        ---------------
