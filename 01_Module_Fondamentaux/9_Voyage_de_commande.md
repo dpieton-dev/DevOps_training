@@ -125,66 +125,66 @@ Non.
 ## Étape 7 — Recherche de la commande
 
 Bash consulte une variable très importante :
-
+```bash
 echo $PATH
-
-Chez toi, elle ressemble probablement à :
-
+```
+Chez vous, elle ressemble probablement à :
+```
 /usr/local/bin
 /usr/bin
 /bin
 ...
+```
 
 Bash cherche :
-
+```
 /usr/local/bin/ls
+  Pas trouvé.
+      ↓
+ /usr/bin/ls
+      ↓
+   Trouvé.
+```
 
-Pas trouvé.
+---
 
-↓
+## Étape 8 — Création du processus
 
-/usr/bin/ls
-
-Trouvé.
-
-Étape 8 — Création du processus
-
-Le noyau est sollicité.
-
-Bash dit :
-
-« Peux-tu lancer /usr/bin/ls ? »
+Le noyau est sollicité, Bash dit : **« Peux-tu lancer /usr/bin/ls ? »**
 
 Le noyau :
 
-crée un nouveau processus ;
-lui attribue un PID ;
-réserve de la mémoire ;
-charge l'exécutable en RAM.
-Étape 9 — Le Scheduler
+*crée un nouveau processus ;
+*lui attribue un PID
+*réserve de la mémoire
+*charge l'exécutable en RAM
 
-Le nouveau processus est prêt.
+---
 
-Mais il ne s'exécute pas immédiatement.
+## Étape 9 — Le Scheduler
+
+Le nouveau processus est prêt, mais il ne s'exécute pas immédiatement.
 
 Le Scheduler décide :
 
 Maintenant c'est au tour de ls.
-Étape 10 — Le processeur
 
-Le CPU commence à exécuter les instructions du programme ls.
+---
 
-Il ne comprend pas :
+## Étape 10 — Le processeur
 
+Le CPU commence à exécuter les instructions du programme ls, il ne comprend pas :
+```bash
 ls
+```
 
 Il exécute des instructions machine.
 
-Étape 11 — Les appels système
+---
 
-ls veut connaître le contenu du répertoire.
+## Étape 11 — Les appels système
 
-Il ne lit pas directement le disque.
+ls veut connaître le contenu du répertoire, il ne lit pas directement le disque.
 
 Il demande au noyau :
 
@@ -194,11 +194,13 @@ C'est un appel système.
 
 Le noyau vérifie :
 
-les permissions ;
-le système de fichiers ;
-les inodes.
+* les permissions
+* le système de fichiers
+* les inodes
 
 Puis il lit les informations.
+
+---
 
 Étape 12 — Le disque
 
