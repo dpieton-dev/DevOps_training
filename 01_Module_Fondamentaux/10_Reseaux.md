@@ -15,292 +15,241 @@
 * Pourquoi on parle de couches réseau.
 * Ce qui se passe lorsque tu fais un ping.
 * Ce qui se passe lorsque tu ouvres un site web.
-* Mise en situation
 
-Imagine que ton ordinateur est seul.
+---
 
-Il possède :
+## Mise en situation
 
-un CPU
-de la RAM
-un SSD
+Imagine que ton ordinateur est seul. Il possède :
 
-Il fonctionne parfaitement.
+* un CPU
+* de la RAM
+* un SSD
 
-Mais...
-
-Il ne peut parler à personne.
+Il fonctionne parfaitement mais il ne peut parler à personne.
 
 Il ne peut pas :
 
-ouvrir Google ;
-télécharger Ubuntu ;
-utiliser GitHub ;
-envoyer un e-mail ;
-communiquer avec un autre serveur.
+* ouvrir Google ;
+* télécharger Ubuntu ;
+* utiliser GitHub ;
+* envoyer un e-mail ;
+* communiquer avec un autre serveur.
 
 Il est complètement isolé.
 
-Le problème
+---
+
+## Le problème
 
 Comment faire communiquer deux ordinateurs ?
 
-Prenons deux PC.
-
-PC A
-
-PC B
+Prenons deux PC 
+```
+    PC A
+    PC B
+```
 
 Question.
 
-Comment PC A peut-il dire :
+Comment PC A peut-il dire : Bonjour PC B ?
 
-Bonjour PC B ?
+---
 
-Une analogie
+## Une analogie
 
-Imagine deux personnes.
-
-Elles veulent communiquer.
+Imagine deux personnes et elles veulent communiquer.
 
 Il faut :
 
-une langue ;
-une adresse ;
-un moyen de transport.
+* une langue
+* une adresse
+* un moyen de transport
 
 Le réseau fonctionne exactement comme cela.
 
-Les trois éléments indispensables
+---
+
+## Les trois éléments indispensables
 
 Pour communiquer il faut :
 
-Un expéditeur
+```
+    Un expéditeur
+        ↓
+    Une adresse
+        ↓
+    Un moyen de transport
+```
 
-↓
+---
 
-Une adresse
+## La carte réseau
 
-↓
+Chaque ordinateur possède une carte réseau, sur votre Ubuntu vous pouvez déjà la voir.
 
-Un moyen de transport
-La carte réseau
+Vous l'avez observée avec :
 
-Chaque ordinateur possède une carte réseau.
-
-Sur ton Ubuntu.
-
-Tu peux déjà la voir.
-
-Tu l'avais observée avec :
-
+```bash
 ip a
+```
 
-Tu avais :
+Vous avez : **wlp3s0** votre interface Wi-Fi.
 
-wlp3s0
+et
 
-Ton interface Wi-Fi.
+**enp2s0** votre carte Ethernet.
 
-Et :
+La carte réseau est au réseau ce que le clavier est à l'utilisateur. Elle permet d'envoyer et de recevoir des informations.
 
-enp2s0
+---
 
-Ta carte Ethernet.
+## Les données
 
-La carte réseau est au réseau ce que le clavier est à l'utilisateur.
+Question : Peut-on envoyer un fichier de 3 Go d'un seul coup ?
 
-Elle permet d'envoyer et de recevoir des informations.
+Non, Ce serait beaucoup trop gros.
 
-Les données
-
-Question.
-
-Peut-on envoyer un fichier de 3 Go d'un seul coup ?
-
-Non.
-
-Ce serait beaucoup trop gros.
-
-Le réseau découpe les données.
-
-En petits morceaux.
+Le réseau découpe les données en petits morceaux.
 
 Ces morceaux s'appellent :
 
-Paquets
+```
+Paquets ou Packets.
+```
 
-ou
+---
 
-Packets.
+## Une analogie
 
-Une analogie
+Imaginez un déménagement. Vous ne mettez pas toute votre maison dans un seul carton.
 
-Imagine un déménagement.
+Vous faites :
 
-Tu ne mets pas toute ta maison dans un seul carton.
-
-Tu fais :
-
-Carton 1
-
-Carton 2
-
-Carton 3
+* Carton 1
+* Carton 2
+* Carton 3
 
 Le réseau fait exactement cela.
 
-Que contient un paquet ?
+---
+
+## Que contient un paquet ?
 
 Chaque paquet possède :
 
-Expéditeur
-
-Destinataire
-
-Données
-
-Contrôle
+* Expéditeur
+* Destinataire
+* Données
+* Contrôle
 
 Comme une lettre.
 
-Adresse MAC
+---
+
+## Adresse MAC
 
 Chaque carte réseau possède un numéro unique.
 
-La MAC Address.
+La **MAC Address**.
 
-Par exemple.
+Par exemple :  5C:EA:1D:4C:81:17
 
-5C:EA:1D:4C:81:17
+vous reconnaissez quelque chose ?
 
-Tu reconnais quelque chose ?
-
-C'est exactement celle que tu avais vue avec :
-
+C'est exactement celle que vous aviez vue avec :
+```bash
 ip a
+```
 
-Sur ton Ubuntu.
+Sur votre Ubuntu, la MAC est :
 
-La MAC est :
+L'identité physique de la carte réseau. Elle ne change presque jamais.
 
-L'identité physique de la carte réseau.
+---
 
-Elle ne change presque jamais.
+## Adresse IP
 
-Adresse IP
+La MAC identifie la carte mais sur Internet. On utilise surtout : L'adresse IP.
 
-La MAC identifie la carte.
+Chez Vous : 192.168.X.XX
 
-Mais...
+C'est votre adresse dans votre réseau local.
 
-Sur Internet.
+Imaginez un immeuble.
 
-On utilise surtout :
-
-L'adresse IP.
-
-Chez toi :
-
-Tu avais :
-
-192.168.1.36
-
-C'est ton adresse dans ton réseau local.
-
-Une analogie
-
-Imagine un immeuble.
-
+```
 La MAC.
-
-↓
-
+   ↓
 La personne.
 
 L'adresse IP.
-
-↓
-
+     ↓
 L'appartement.
+```
 
 Les deux sont nécessaires.
 
-Le switch
+---
 
-Dans un réseau local.
+## Le switch
 
-Les ordinateurs sont reliés à un switch.
+Dans un réseau local, les ordinateurs sont reliés à un switch.
 
-Le switch connaît les adresses MAC.
-
-Il sait :
+Le switch connaît les adresses MAC. Il sait :
 
 Qui est connecté sur quel port.
 
-Le routeur
+---
 
-Pour sortir de ton réseau.
+## Le routeur
 
-Tu passes par :
+Pour sortir de votre réseau. vous passez par : Routeur
 
-Routeur
-
-Chez toi.
-
-C'est ta box Internet.
+Chez vous, C'est votre box Internet.
 
 Elle relie :
-
-Ton réseau
-
-↓
-
+```
+votre réseau
+    ↓
 Internet.
+```
+---
 
-Le paquet voyage
+## Le paquet voyage
 
 Imaginons :
 
-Tu fais :
-
+vous faites :
+```bash
 ping 8.8.8.8
+```
 
 Le paquet suit ce chemin.
 
-Ton PC
-
-↓
-
+```
+votre PC
+  ↓
 Carte réseau
-
-↓
-
+  ↓
 Switch
-
-↓
-
+  ↓
 Routeur
-
-↓
-
-FAI
-
-↓
-
+  ↓
+ FAI
+  ↓
 Internet
-
-↓
-
+  ↓
 Google DNS
-
-↓
-
+  ↓
 Réponse
+```
 
 Et le chemin retour est similaire.
 
-Pourquoi plusieurs couches ?
+---
+
+## Pourquoi plusieurs couches ?
 
 Question.
 
@@ -326,57 +275,62 @@ Chaque problème est traité par une couche différente.
 
 Nous détaillerons les modèles OSI et TCP/IP dans le module Réseau.
 
-Cas réel DevOps 💼
+---
 
-Un développeur te dit :
+## Cas réel DevOps 💼
+
+Un développeur vous dit :
 
 « Le serveur ne répond plus. »
 
 Avant d'accuser l'application, un ingénieur vérifie :
 
-Le câble est-il branché ?
-L'interface réseau est-elle active ?
-L'adresse IP est-elle correcte ?
-Le routeur répond-il ?
-Le DNS fonctionne-t-il ?
-Le pare-feu bloque-t-il la communication ?
+* Le câble est-il branché ?
+* L'interface réseau est-elle active ?
+* L'adresse IP est-elle correcte ?
+* Le routeur répond-il ?
+* Le DNS fonctionne-t-il ?
+* Le pare-feu bloque-t-il la communication ?
 
 Le réseau est souvent la première étape du diagnostic.
 
-⚠️ Les erreurs classiques
+---
+
+## ⚠️ Les erreurs classiques
 
 ❌ « L'adresse IP est gravée dans le matériel. »
-
 Non. C'est l'adresse MAC qui est liée à la carte réseau.
 
 ❌ « Un fichier est envoyé d'un seul bloc. »
-
 Non. Il est découpé en paquets.
 
 ❌ « Internet est un seul réseau. »
-
 Non. C'est un immense réseau de réseaux.
 
-⭐ Ce qu'un Senior ferait
+---
+
+## ⭐ Ce qu'un Senior ferait
 
 Lorsqu'une communication échoue, un ingénieur raisonne par couches :
 
-Le lien physique fonctionne-t-il ?
-L'interface réseau est-elle active ?
-Les adresses IP sont-elles correctes ?
-Le routage est-il correct ?
-Le service distant écoute-t-il ?
-L'application répond-elle ?
+* Le lien physique fonctionne-t-il ?
+* L'interface réseau est-elle active ?
+* Les adresses IP sont-elles correctes ?
+* Le routage est-il correct ?
+* Le service distant écoute-t-il ?
+* L'application répond-elle ?
 
 Il ne saute jamais directement à la conclusion.
 
-📝 Résumé
+---
 
-Aujourd'hui, tu as appris que :
+## 📝 Résumé
 
-Une carte réseau permet de communiquer.
-Les données sont découpées en paquets.
-Une adresse MAC identifie une interface réseau.
-Une adresse IP identifie une machine sur un réseau.
-Les switchs utilisent les adresses MAC.
-Les routeurs relient plusieurs réseaux.
+Aujourd'hui, vous avez appris que :
+
+* Une carte réseau permet de communiquer.
+* Les données sont découpées en paquets.
+* Une adresse MAC identifie une interface réseau.
+* Une adresse IP identifie une machine sur un réseau.
+* Les switchs utilisent les adresses MAC.
+* Les routeurs relient plusieurs réseaux.

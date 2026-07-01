@@ -202,119 +202,110 @@ Puis il lit les informations.
 
 ---
 
-Étape 12 — Le disque
+## Étape 12 — Le disque
 
-Si les données ne sont pas déjà en cache :
-
-Le noyau lit le SSD.
+Si les données ne sont pas déjà en cache : Le noyau lit le SSD.
 
 Les informations remontent :
+```
+     SSD
+      ↓
+     RAM
+      ↓
+     Kernel
+      ↓
+      ls
+```
 
-SSD
+---
 
-↓
+## Étape 13 — La sortie
 
-RAM
+ls reçoit les données. Il prépare une sortie :
 
-↓
+* Documents
+* Images
+* Téléchargements
 
-Kernel
+Mais il ne les affiche pas, il écrit simplement dans la sortie standard (stdout).
 
-↓
+---
 
-ls
-Étape 13 — La sortie
+## Étape 14 — Le terminal
 
-ls reçoit les données.
-
-Il prépare une sortie :
-
-Documents
-
-Images
-
-devopslab
-
-Téléchargements
-
-Mais il ne les affiche pas.
-
-Il écrit simplement dans la sortie standard (stdout).
-
-Étape 14 — Le terminal
-
-Le terminal reçoit cette sortie.
-
-Il dessine les caractères.
+Le terminal reçoit cette sortie, il dessine les caractères.
 
 Le GPU (ou la partie graphique du processeur) transforme ces caractères en pixels.
 
-Ton écran les affiche.
+Votre écran les affiche.
 
 Tu vois enfin :
 
-Documents
-Images
-devopslab
-Téléchargements
+* Documents
+* Images 
+* Téléchargements
+
 Le schéma complet
 
 Voici le voyage de ta commande :
 
-Tes doigts
-     │
-     ▼
-Clavier
-     │
-     ▼
-Contrôleur USB
-     │
-     ▼
-Interruption (IRQ)
-     │
-     ▼
-Kernel
-     │
-     ▼
-Terminal
-     │
-     ▼
-Bash
-     │
-     ▼
-Recherche dans $PATH
-     │
-     ▼
-Création du processus
-     │
-     ▼
-Scheduler
-     │
-     ▼
-CPU
-     │
-     ▼
-Appels système
-     │
-     ▼
-Kernel
-     │
-     ▼
-SSD / RAM
-     │
-     ▼
-stdout
-     │
-     ▼
-Terminal
-     │
-     ▼
-Écran
-🎯 Ce schéma est le cœur de toute la formation
+```
+      Vos doigts
+          │
+          ▼
+       Clavier
+          │
+          ▼
+      Contrôleur USB
+          │
+          ▼
+     Interruption (IRQ)
+          │
+          ▼
+        Kernel
+          │
+          ▼
+       Terminal
+          │
+          ▼
+         Bash
+          │
+          ▼
+   Recherche dans $PATH
+          │
+          ▼
+   Création du processus
+          │
+          ▼
+       Scheduler
+          │
+          ▼
+         CPU
+          │
+          ▼
+     Appels système
+          │
+          ▼
+        Kernel
+          │
+          ▼
+      SSD / RAM
+          │
+          ▼
+       stdout
+          │
+          ▼
+       Terminal
+          │
+          ▼
+        Écran
+```
 
-Regarde bien.
+---
 
-Nous venons d'utiliser presque tout ce que nous avons appris :
+## 🎯 Ce schéma est le cœur de toute la formation
+
+Regarde bien, Nous venons d'utiliser presque tout ce que nous avons appris :
 
 ✅ CPU
 
@@ -334,55 +325,58 @@ Nous venons d'utiliser presque tout ce que nous avons appris :
 
 Tout est relié.
 
-Cas réel DevOps 💼
+---
+
+## Cas réel DevOps 💼
 
 Imagine maintenant que la commande :
-
+```bash
 ls
+```
 
-met 10 secondes à répondre.
+met **10 secondes** à répondre. Vous savez désormais où chercher :
 
-Tu sais désormais où chercher :
-
-Le clavier ? (peu probable)
-Le shell ?
-Le Scheduler ?
-Le CPU ?
-Le SSD ?
-Le système de fichiers ?
-Les permissions ?
-Un montage réseau lent ?
+* Le clavier ? (peu probable)
+* Le shell ?
+* Le Scheduler ?
+* Le CPU ?
+* Le SSD ?
+* Le système de fichiers ?
+* Les permissions ?
+* Un montage réseau lent ?
 
 Un ingénieur DevOps ne cherche pas une "commande magique". Il décompose le problème en étapes.
 
-⚠️ Les erreurs classiques
+---
+
+## ⚠️ Les erreurs classiques
 
 ❌ « ls affiche les fichiers directement. »
-
 Non. Il demande au noyau.
 
 ❌ « Bash exécute les commandes lui-même. »
-
 Non. Il demande au noyau de créer un processus.
 
 ❌ « Le disque envoie les données au CPU. »
-
 Non. Les données passent d'abord par la RAM.
 
-⭐ Ce qu'un Senior ferait
+---
+
+## ⭐ Ce qu'un DevOps ferait
 
 Quand une commande est lente, il ne se demande pas seulement "quelle commande utiliser ?".
 
 Il se demande :
 
-Où est le ralentissement ?
-CPU ?
-RAM ?
-Cache ?
-Disque ?
-Réseau ?
-Système de fichiers ?
-Noyau ?
-Processus bloqué ?
+*Où est le ralentissement ?
+* CPU ?
+* RAM ?
+* Cache ?
+* Disque ?
+* Réseau ?
+* Système de fichiers ?
+* Noyau ?
+* Processus bloqué ?
 
 👉 Le diagnostic est un raisonnement, pas une suite de commandes.
+
