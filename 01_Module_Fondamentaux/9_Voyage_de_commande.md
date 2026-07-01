@@ -1,175 +1,128 @@
-Le voyage d'une commande
+# Le voyage d'une commande
 
 Comment une simple commande traverse tout l'ordinateur
+---
 
-🎯 Objectifs
+## 🎯 Objectifs
 
 À la fin de ce chapitre tu seras capable de suivre mentalement une commande depuis :
+* ton clavier
+* jusqu'au processeur
+* puis au disque
+* puis au noyau
+* puis au terminal
 
-ton clavier ;
-jusqu'au processeur ;
-puis au disque ;
-puis au noyau ;
-puis au terminal.
+Et surtout, tu comprendras enfin pourquoi Linux fonctionne comme il fonctionne.
 
-Et surtout...
+---
 
-Tu comprendras enfin pourquoi Linux fonctionne comme il fonctionne.
+## Mise en situation
 
-Mise en situation
-
-Tu ouvres un terminal.
-
-Tu écris :
-
+Tu ouvres un terminal et tu écris :
+```bash
 ls
-
-Puis tu appuies sur Entrée.
-
-Question.
+```
+Puis tu appuies sur **Entrée**.
 
 Que se passe-t-il ?
 
-La plupart des gens répondent :
-
-Linux affiche les fichiers.
-
-C'est vrai.
-
-Mais il manque environ...
-
-150 étapes. 😄
+La plupart des gens répondent : Linux affiche les fichiers.
+C'est vrai. Mais il manque environ... **150 étapes**. 😄
 
 Aujourd'hui, nous allons toutes les résumer.
 
-Étape 1 — Le clavier
+---
 
-Tu appuies sur :
+## Étape 1 — Le clavier
 
-L
+Tu appuies sur : L
 
-Le clavier ne connaît pas la lettre L.
+Le clavier ne connaît pas la lettre L, Il ferme simplement un circuit électrique.
+Une petite puce détecte cette fermeture, Elle génère un scan code (code matériel de la touche) et envoie ce code à l'ordinateur.
 
-Il ferme simplement un circuit électrique.
+---
 
-Une petite puce détecte cette fermeture.
-
-Elle génère un scan code (code matériel de la touche).
-
-Elle envoie ce code à l'ordinateur.
-
-Étape 2 — Le contrôleur USB
+## Étape 2 — Le contrôleur USB
 
 Le signal arrive sur :
-
+```
 Carte mère
-        │
-        ▼
+    │
+    ▼
 Contrôleur USB
-
+```
 Le contrôleur transmet les données au processeur.
 
-Étape 3 — Une interruption
+---
 
-Le CPU ne regarde pas le clavier en permanence.
+## Étape 3 — Une interruption
 
-Le clavier lui envoie une interruption matérielle (IRQ).
+Le CPU ne regarde pas le clavier en permanence. Le clavier lui envoie une **interruption matérielle (IRQ)**.
 
-Le CPU dit :
-
-« Quelqu'un demande mon attention. »
+Le CPU dit : « Quelqu'un demande mon attention. »
 
 Il interrompt brièvement ce qu'il faisait.
 
-Petite parenthèse : les interruptions
+**Petite parenthèse : les interruptions**
 
-Imagine que tu lis un livre.
-
-Le téléphone sonne.
-
-Tu décroches.
-
-Tu réponds.
-
-Tu reprends ta lecture.
+Imagine que tu lis un livre, Le téléphone sonne. 
+Tu décroches -> Tu réponds -> Tu reprends ta lecture.
 
 C'est exactement une interruption.
-
 Sans interruptions, le CPU devrait vérifier des millions de fois par seconde si une touche a été pressée. Ce serait extrêmement inefficace.
 
-Étape 4 — Le noyau
+---
 
-Le noyau reçoit le scan code.
+## Étape 4 — Le noyau
 
-Il consulte la disposition du clavier (AZERTY dans ton cas).
+Le noyau reçoit le scan code, Il consulte la disposition du clavier ou AZERTY selon le cas.
 
 Il traduit :
-
+```
 Scan code
-
-↓
-
-l
-
+   ↓
+   l
+```
 Puis transmet cette information au terminal.
 
-Étape 5 — Le terminal
+---
 
-Le terminal affiche :
+## Étape 5 — Le terminal
 
-l
+Le terminal affiche : l
 
-Mais...
+Mais Il ne lance rien. Il attend.
 
-Il ne lance rien.
+Tu tapes ensuite : s
 
-Il attend.
+Puis : Entrée.
 
-Tu tapes ensuite :
+---
 
-s
-
-Puis :
-
-Entrée.
-
-Étape 6 — Bash
+## Étape 6 — Bash
 
 Le terminal transmet la ligne complète :
-
+```bash
 ls
-
+```
 au shell Bash.
 
-Bash est un processus.
-
-Son travail est d'interpréter ce que tu écris.
+Bash est un processus. Son travail est d'interpréter ce que tu écris.
 
 Première question de Bash
-
-Bash se demande :
-
-Est-ce une commande interne ?
-
+Bash se demande : Est-ce une commande interne ?
 Comme :
+* cd
+* echo
+* exit
 
-cd
-
-ou
-
-echo
-
-ou
-
-exit
-
-Ici :
-
-ls
+Ici : ls
 
 Non.
 
-Étape 7 — Recherche de la commande
+---
+
+## Étape 7 — Recherche de la commande
 
 Bash consulte une variable très importante :
 
