@@ -45,7 +45,7 @@ Super + ↑
 
 ### Bash
 
-**Historique : **
+**Historique :**
 ```
 ↑
 ```
