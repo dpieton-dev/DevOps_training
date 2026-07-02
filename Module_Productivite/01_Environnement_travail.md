@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Objectifs
+## 🎯 Objectifs
 
 À la fin de ce chapitre tu sauras :
 
