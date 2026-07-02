@@ -11,8 +11,7 @@ Je regarde systématiquement trois choses quand j'ouvre un terminal :
 Cette habitude évite énormément d'erreurs.
 
 ---
-
-## Environnement de travail
+## Environnement de travail
 
 * Terminal à gauche
 * Documentation à droite
