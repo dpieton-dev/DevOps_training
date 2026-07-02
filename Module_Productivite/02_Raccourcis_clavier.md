@@ -14,11 +14,10 @@
 * Gérer plusieurs bureaux virtuels.
 * Contrôler le terminal efficacement.
 * Utiliser les raccourcis Bash indispensables.
-* Comprendre pourquoi les ingénieurs privilégient le clavier.
-
+* Comprendre pourquoi les ingénieurs privilégient le clavier
 ---
 
-## Pourquoi les raccourcis sont importants ?
+## Pourquoi les raccourcis sont importants ?
 
 Imagine deux personnes.
 
@@ -207,7 +206,7 @@ Super + D
 ```
 ---
 
-## Captures d'écran
+## Captures d'écran
 
 Ubuntu possède des raccourcis très pratiques.
 
@@ -321,7 +320,7 @@ Tu peux retrouver et adapter une commande en quelques secondes au lieu de la ret
 
 ---
 
-## ⭐ Ce qu'un Senior ferait
+## ⭐ Ce qu'un DevOps ferait
 
 Observe un administrateur Linux expérimenté.
 
