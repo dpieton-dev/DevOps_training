@@ -1,8 +1,8 @@
-SSH : Administrer un serveur à distance
+## SSH : Administrer un serveur à distance
 
 "SSH est au DevOps ce que le volant est au conducteur."
 
-🎯 Objectifs
+## 🎯 Objectifs
 
 À la fin de ce chapitre, tu comprendras :
 
@@ -14,15 +14,14 @@ Ce qu'est une paire de clés SSH.
 Le rôle de known_hosts.
 Le rôle de authorized_keys.
 Les bonnes pratiques de sécurité.
-📖 Avant de commencer
+
+## 📖 Avant de commencer
 
 Imagine.
 
 Tu travailles chez OVH.
 
-Un serveur est situé dans un datacenter à :
-
-Paris.
+Un serveur est situé dans un datacenter à : Paris.
 
 Toi, tu es chez toi.
 
@@ -38,29 +37,25 @@ Tu dois contrôler le serveur...
 
 à distance.
 
-Avant SSH
+---
+
+## Avant SSH
 
 Dans les années 80...
 
-On utilisait :
-
-Telnet
+On utilisait : **Telnet**
 
 Le problème ?
 
-Le mot de passe circulait :
-
-en clair.
+Le mot de passe circulait : en clair.
 
 N'importe qui pouvait le lire.
 
 C'était catastrophique.
 
-La naissance de SSH
+## La naissance de SSH
 
-SSH signifie :
-
-Secure SHell
+SSH signifie : **Secure SHell**
 
 Il remplace Telnet.
 
@@ -68,7 +63,9 @@ Son objectif :
 
 Créer un tunnel sécurisé entre deux machines.
 
-Une analogie
+---
+
+## Une analogie
 
 Imagine une lettre.
 
@@ -82,40 +79,28 @@ Même si quelqu'un intercepte le courrier...
 
 Il ne peut pas le comprendre.
 
-Le principe
+## Le principe
 
-Tu exécutes :
+Tu exécutes : ssh utilisateur@serveur
 
-ssh utilisateur@serveur
-
-Exemple :
-
-ssh dominique@192.168.1.50
+Exemple : ssh dominique@192.168.1.50
 
 Le client SSH contacte le serveur.
 
-Ce qui se passe
+Ce qui se passe :
+```
 Ton PC
-
 ↓
-
 SSH Client
-
 ↓
-
 Internet
-
 ↓
-
 SSH Server
-
 ↓
-
 Bash
-
 ↓
-
 Kernel
+```
 
 Tu obtiens un shell distant.
 
@@ -151,7 +136,7 @@ Simple.
 
 Mais pas idéal.
 
-Pourquoi ?
+**Pourquoi ?**
 
 Parce que :
 
@@ -162,52 +147,39 @@ La solution
 
 Les clés SSH.
 
-Les clés SSH
+**Les clés SSH**
 
 Au lieu d'un mot de passe.
 
 Tu possèdes :
 
-Clé privée
-
-+
-
-Clé publique
+Clé privée + Clé publique
 
 Elles sont générées ensemble.
 
-Une analogie
+**Une analogie**
 
 Imagine un cadenas.
 
-La clé publique :
-
-Le cadenas.
+La clé publique : Le cadenas.
 
 Tu peux le donner à tout le monde.
 
-La clé privée :
-
-La clé.
+La clé privée : La clé.
 
 Tu ne la donnes jamais.
 
 Génération
 
-On utilise :
+On utilise : ssh-keygen
 
-ssh-keygen
-
-Tu obtiens :
-
-id_ed25519
+Tu obtiens : id_ed25519
 
 id_ed25519.pub
-La clé privée
 
-Exemple :
+**La clé privée**
 
-~/.ssh/id_ed25519
+Exemple : ~/.ssh/id_ed25519
 
 ⚠️ Elle doit rester secrète.
 
@@ -219,9 +191,7 @@ Dropbox
 Email
 La clé publique
 
-Exemple :
-
-~/.ssh/id_ed25519.pub
+Exemple : ~/.ssh/id_ed25519.pub
 
 Tu peux la copier sur les serveurs.
 
@@ -278,25 +248,20 @@ Si ta clé est présente.
 Tu peux entrer.
 
 Schéma
+
 Ton PC
 
-id_ed25519
-(clé privée)
-
+id_ed25519 (clé privée)
 ↓
-
 SSH
-
 ↓
-
 Serveur
 
-authorized_keys
-(clé publique)
+authorized_keys (clé publique)
 
 Les deux doivent correspondre.
 
-Le SSH Agent
+**Le SSH Agent**
 
 Question.
 
@@ -308,34 +273,29 @@ Le SSH Agent peut conserver temporairement les clés déverrouillées en mémoir
 
 Nous le verrons plus loin.
 
-Les ports
+**Les ports**
 
 Par défaut.
 
-SSH écoute sur :
+SSH écoute sur : 22
 
-22
+Tu peux le vérifier sur un serveur : ss -tln
 
-Tu peux le vérifier sur un serveur :
+---
 
-ss -tln
-Cas réel DevOps 💼
+## Cas réel DevOps 💼
 
 Imagine.
 
-Tu dois administrer :
-
-250 serveurs.
+Tu dois administrer : 250 serveurs.
 
 Tu ne peux évidemment pas taper 250 mots de passe.
 
-Grâce aux clés SSH :
-
-Tu te connectes immédiatement.
+Grâce aux clés SSH : Tu te connectes immédiatement.
 
 C'est indispensable pour l'automatisation avec Ansible, Terraform ou les pipelines CI/CD.
 
-⚠️ Les erreurs classiques
+## ⚠️ Les erreurs classiques
 
 ❌ Envoyer sa clé privée par mail.
 
@@ -345,138 +305,22 @@ C'est indispensable pour l'automatisation avec Ansible, Terraform ou les pipelin
 
 ❌ Utiliser root directement en SSH sans nécessité.
 
-⭐ Ce qu'un Senior ferait
+## ⭐ Ce qu'un DevOps ferait
 
 Un ingénieur expérimenté :
 
-utilise une clé ED25519 ;
-protège sa clé privée avec une passphrase ;
-désactive l'authentification par mot de passe sur les serveurs sensibles ;
-utilise sudo plutôt que de se connecter directement en root ;
-surveille les journaux SSH.
-📝 Résumé
+* utilise une clé ED25519 ;
+* protège sa clé privée avec une passphrase ;
+* désactive l'authentification par mot de passe sur les serveurs sensibles ;
+* utilise sudo plutôt que de se connecter directement en root ;
+* surveille les journaux SSH.
+
+## 📝 Résumé
 
 Aujourd'hui, tu as appris que :
 
-SSH permet d'administrer un serveur à distance.
-Il chiffre toutes les communications.
-Une paire de clés remplace avantageusement un mot de passe.
-known_hosts mémorise les serveurs connus.
-authorized_keys définit les clés autorisées.
-🧪 TP 5 — Découverte de SSH
-
-Même sans serveur distant, nous pouvons préparer ton environnement.
-
-1. Vérifier la présence de SSH
-ssh -V
-
-Tu verras la version installée.
-
-2. Vérifier le dossier SSH
-ls -la ~/.ssh
-
-Observe son contenu.
-
-S'il n'existe pas encore, ce n'est pas un problème.
-
-3. Générer une paire de clés
-
-Nous utiliserons l'algorithme recommandé aujourd'hui :
-
-ssh-keygen -t ed25519 -C "dominique@devopslab"
-
-Lorsque l'assistant te pose des questions :
-
-emplacement : Entrée (par défaut)
-phrase secrète : tu peux en mettre une (recommandé) ou laisser vide pour le laboratoire
-
-Tu obtiendras :
-
-~/.ssh/id_ed25519
-
-~/.ssh/id_ed25519.pub
-4. Afficher la clé publique
-cat ~/.ssh/id_ed25519.pub
-
-Tu verras une longue ligne commençant par :
-
-ssh-ed25519
-
-C'est cette clé que l'on copie sur les serveurs.
-
-5. Vérifier les permissions
-ls -l ~/.ssh
-
-Observe les droits.
-
-La clé privée ne doit pas être lisible par d'autres utilisateurs.
-
-6. Tester une connexion locale (si le serveur SSH est installé)
-
-Vérifie d'abord :
-
-systemctl status ssh
-
-Si le service est actif :
-
-ssh localhost
-
-Tu te connecteras... à ta propre machine.
-
-C'est un excellent exercice pour comprendre le fonctionnement de SSH.
-
-🎯 Challenge du chapitre
-
-Réponds aux questions suivantes :
-
-Pourquoi la clé publique peut-elle être partagée sans risque ?
-Pourquoi la clé privée doit-elle rester secrète ?
-À quoi sert known_hosts ?
-À quoi sert authorized_keys ?
-Pourquoi SSH est-il plus sûr que Telnet ?
-🧰 Boîte à outils du Senior — SSH
-
-Les commandes que j'utilise tous les jours :
-
-ssh user@host                 # Connexion
-
-ssh -p 2222 user@host         # Port personnalisé
-
-ssh-keygen -t ed25519         # Générer une clé
-
-ssh-copy-id user@host         # Copier la clé publique
-
-ssh-add ~/.ssh/id_ed25519     # Ajouter une clé au SSH Agent
-
-ssh -v user@host              # Mode verbeux (diagnostic)
-
-scp fichier user@host:/tmp    # Copier un fichier
-
-sftp user@host                # Transfert interactif
-
-Les deux options que j'utilise le plus pour diagnostiquer un problème :
-
-ssh -v
-
-ssh -vvv
-
-Le mode verbeux explique presque toujours pourquoi une connexion échoue.
-
-📖 Anecdote d'entreprise
-
-Lors d'une intervention, un administrateur reçoit ce message :
-
-WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
-
-Son premier réflexe est de supprimer l'entrée du fichier known_hosts.
-
-Un ingénieur senior, lui, s'arrête.
-
-Il se pose la question :
-
-Le serveur a-t-il réellement été réinstallé ?
-Ou suis-je victime d'une attaque de type Man-in-the-Middle ?
-
-Après vérification, le serveur avait effectivement été reconstruit. L'alerte était légitime.
-
-🎓 Leçon : ne jamais ignorer un avertissement de sécurité sans comprendre son origine.
+* SSH permet d'administrer un serveur à distance.
+* Il chiffre toutes les communications.
+* Une paire de clés remplace avantageusement un mot de passe.
+* known_hosts mémorise les serveurs connus.
+* authorized_keys définit les clés autorisées.

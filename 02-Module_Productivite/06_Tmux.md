@@ -1,146 +1,113 @@
-tmux : Ne perdez plus jamais votre terminal
+# tmux : Ne perdez plus jamais votre terminal
 
 "SSH te connecte au serveur. tmux fait en sorte que tu n'en sois jamais déconnecté."
 
-🎯 Objectifs
+## 🎯 Objectifs
 
 À la fin de ce chapitre, tu seras capable de :
 
-Comprendre pourquoi tmux existe.
-Installer et configurer tmux.
-Créer plusieurs fenêtres et panneaux.
-Détacher et rattacher une session.
-Travailler sur plusieurs tâches simultanément.
-Comprendre pourquoi presque tous les administrateurs Linux utilisent tmux.
-📖 Avant de commencer
+* Comprendre pourquoi tmux existe.
+* Installer et configurer tmux.
+* Créer plusieurs fenêtres et panneaux.
+* Détacher et rattacher une session.
+* Travailler sur plusieurs tâches simultanément.
+* Comprendre pourquoi presque tous les administrateurs Linux utilisent tmux.
+
+
+## 📖 Avant de commencer
 
 Imagine cette situation.
 
-Tu lances une mise à jour :
+Tu lances une mise à jour : sudo apt update && sudo apt upgrade
 
-sudo apt update && sudo apt upgrade
+La mise à jour dure : 40 minutes.
 
-La mise à jour dure :
-
-40 minutes.
-
-Au bout de 35 minutes...
-
-Le Wi-Fi se coupe.
-
-Ton SSH est fermé.
-
-La mise à jour est interrompue.
+Au bout de 35 minutes, le Wi-Fi se coupe, ton SSH est fermé et la mise à jour est interrompue.
 
 Tu dois tout recommencer.
 
 Cela arrive beaucoup plus souvent qu'on ne le croit.
 
-Pourquoi tmux a été créé ?
+
+## Pourquoi tmux a été créé ?
 
 Parce qu'un terminal classique est lié à ta connexion.
 
-Si la connexion disparaît :
-
-Le terminal disparaît.
+Si la connexion disparaît : Le terminal disparaît.
 
 Les processus reçoivent souvent un signal de fin et peuvent s'arrêter.
 
-tmux change complètement cette logique.
+**tmux** change complètement cette logique.
 
-Une analogie
+
+## Une analogie
 
 Imagine un bureau.
 
-Sans tmux :
+Sans tmux : Tu travailles sur la table.
 
-Tu travailles sur la table.
+Quelqu'un enlève la table. Tu perds tout.
 
-Quelqu'un enlève la table.
+Avec tmux : Tu travailles dans une pièce.
 
-Tu perds tout.
+Même si tu quittes la pièce, la pièce reste et tu peux revenir plus tard.
 
-Avec tmux :
 
-Tu travailles dans une pièce.
+## Qu'est-ce que tmux ?
 
-Même si tu quittes la pièce...
-
-La pièce reste.
-
-Tu peux revenir plus tard.
-
-Qu'est-ce que tmux ?
-
-tmux signifie :
-
-Terminal Multiplexer
+tmux signifie : **Terminal Multiplexer**
 
 Il permet de créer plusieurs terminaux dans un seul terminal.
 
-Mais surtout...
+Mais surtout, les sessions continuent de fonctionner même si tu te déconnectes.
 
-Les sessions continuent de fonctionner même si tu te déconnectes.
 
-Architecture
+## Architecture
 
 Sans tmux :
-
+```
 SSH
-
 ↓
-
 Bash
-
 ↓
-
 Commande
+```
 
 Avec tmux :
-
+```
 SSH
-
 ↓
-
 tmux
-
 ↓
-
 Fenêtre 1
 
 Fenêtre 2
 
 Fenêtre 3
-
 ↓
-
 Bash
+```
 
 tmux devient un intermédiaire entre toi et le shell.
 
-Installation
+
+## Installation
 
 Sur Ubuntu :
 
-sudo apt update
-sudo apt install tmux
+* sudo apt update
+* sudo apt install tmux
 
-Vérifie ensuite :
+Vérifie ensuite : **tmux -V**
 
-tmux -V
+Tu devrais obtenir une version, par exemple : **tmux 3.x**
 
-Tu devrais obtenir une version, par exemple :
 
-tmux 3.x
-Première session
+## Première session
 
-Lance :
+Lance : tmux
 
-tmux
-
-Tu entres dans ta première session.
-
-Tu remarqueras une barre d'état en bas de l'écran.
+Tu entres dans ta première session, Tu remarqueras une barre d'état en bas de l'écran.
 
 C'est tmux.
 
